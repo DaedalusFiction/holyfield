@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import {db, app, fileStorage, trialWrite, trialGet} from '../firebase.js'
-import {useStorage} from '../hooks/useStorage.js'
+import { fileStorage } from '../firebase.js'
+
+import { uploadBytes, ref } from '@firebase/storage'
 
 
 const UploadForm = () => {
@@ -23,13 +24,20 @@ const UploadForm = () => {
         
     }
 
-    const clickHandler = (e) => {
-        console.log("clicked")
+    const uploadFile = () => {
+        const storageRef = ref(fileStorage, file.name);
+
+
+        uploadBytes(storageRef, file).then((snapshot) => {
+            console.log('successfully uploaded')
+        })
     }
+
+    
     return (
         <div>
             <input type="file" onChange={changeHandler} />
-            <button onClick={useStorage(file)}>Upload Picture </button>
+            <button onClick={uploadFile}>Upload Picture</button>
             {err && <p>{err}</p>}
             {file && <p>{file.name}</p>}
         </div>
