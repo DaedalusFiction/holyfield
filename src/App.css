@@ -1,17 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-
-
+:root {
+  --ff-primary: 'Roboto', sans-serif;
+}
 
 * {
   margin: 0;
   padding: 0;
+  text-decoration: none; 
+  color: rgb(58, 53, 53);
 }
 
 body {
   overflow-x: hidden;
   background: rgb(253, 231, 217);
   color: rgb(58, 53, 53);
+}
+
+h2 {
+  margin: 1em 0 1em 15vw;
+  font-family: var(--ff-primary);
+  font-size: 2rem;
 }
 
 
@@ -21,10 +31,6 @@ body {
   max-width: 1000px;
   margin: 0 auto;
 }
-.photo-menu h2 {
-  font-size: 2rem;
-}
-
 .photo-menu p {
   text-align: center;
 }
@@ -72,7 +78,7 @@ body {
   animation-duration: .5s;
 }
 .animals {
-  background-image: url('./placeholderPhotos/logs.jpg');
+  background-image: url('./placeholderPhotos/llama.jpg');
   animation-duration: .8s;
   
 }
@@ -88,9 +94,6 @@ body {
   background-image: url('./placeholderPhotos/haybales.jpg');
   animation-duration: 1.7s;
 }
-
-
-
 
 
 .slideshow-container {
@@ -122,15 +125,15 @@ body {
 }
 
 .header {
-  margin: 1em 0;
+  background-image: url('./placeholderPhotos/tractor2.jpg');
+  background-size: cover;
+  padding: 1.5em 0;
   text-align: center;
   font-size: 2rem;
   font-family: 'Special Elite', cursive;
 }
 
-.photo-menu h2 {
-  margin-left: 15vw;
-}
+
 
 .photo-menu .grid {
   width: 90%;

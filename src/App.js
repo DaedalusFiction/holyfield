@@ -15,20 +15,22 @@ import PhotoPage from './components/PhotoPage';
 function App() {
   
   return (
-    <div className="App container">
+    <div className="App">
       <Router>
         <Header header="Holyfield Farms" subtext="est. 1865"/>
         
-        <Routes>
-          <Route path="/farm" element={<PhotoPage page="farm" />} />
-          <Route path="/family" element={<PhotoPage page="family" />} />
-          <Route path="/animals" element={<PhotoPage page="animals" />} />
-          <Route path="/projects" element={<PhotoPage page="projects" />} />
-          <Route path="/holidays" element={<PhotoPage page="holidays" />} />
-          <Route path="/misc" element={<PhotoPage page="misc" />} />
-          <Route path="/" element={<PhotoMenu />} />
+        <div className="container">
+          <Routes>
+            <Route path="/farm" element={<PhotoPage page="farm" />} />
+            <Route path="/family" element={<PhotoPage page="family" />} />
+            <Route path="/animals" element={<PhotoPage page="animals" />} />
+            <Route path="/projects" element={<PhotoPage page="projects" />} />
+            <Route path="/holidays" element={<PhotoPage page="holidays" />} />
+            <Route path="/misc" element={<PhotoPage page="misc" />} />
+            <Route path="/" element={<PhotoMenu />} />
           
-        </Routes>
+          </Routes>
+        </div>
       </Router>
     </div>
   );

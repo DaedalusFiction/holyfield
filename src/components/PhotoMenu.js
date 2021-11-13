@@ -12,7 +12,7 @@ const PhotoMenu = () => {
                 <PhotoPageLink page="animals" value="Animals" />
                 <PhotoPageLink page="projects" value="Projects"  />
                 <PhotoPageLink page="holidays" value="Holidays" />
-                <PhotoPageLink page="misc" value="Misc." />
+                <PhotoPageLink page="misc" value="Misc" />
             </div>
         </div>
     )
