@@ -1,14 +1,10 @@
 
 import './App.css';
 import Header from './components/Header';
-import PhotoMenu from './components/PhotoMenu';
-import Slideshow from './components/Slideshow';
-import {
-  BrowserRouter as Router,
+import PhotoMenu from './components/PhotoMenu'; 
+import { BrowserRouter as Router,
   Routes,
-  Route,
-  Link
-} from "react-router-dom";
+  Route } from "react-router-dom";
 import PhotoPage from './components/PhotoPage';
 
 
