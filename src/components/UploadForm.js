@@ -1,14 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
-import { fileStorage } from '../firebase.js'
-
-import { uploadBytes, ref } from '@firebase/storage'
+import { fileStorage, db } from '../firebase.js'
+import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { uploadBytes, ref, getDownloadURL } from '@firebase/storage'
 
 
 const UploadForm = () => {
     const [file, setFile] = useState(null);
     const allowedTypes = ['image/png', 'image/jpeg']
     const [err, setErr] = useState('')
+    const [url, setUrl] = useState('')
 
     const changeHandler = (e) => {
         const selectedFile = e.target.files[0];
@@ -28,10 +29,21 @@ const UploadForm = () => {
         const storageRef = ref(fileStorage, file.name);
 
 
-        uploadBytes(storageRef, file).then((snapshot) => {
-            console.log('successfully uploaded')
+        uploadBytes(storageRef, file).then( async () => {
+            const url = await getDownloadURL(storageRef);
+            uploadDocumentInfo(file, url);
         })
     }
+
+    const uploadDocumentInfo = async (file, docURL ) => {
+        try {
+            const docRef = await addDoc(collection(db, "photos"), {
+                name: file.name,
+                URL: docURL
+            })
+        } catch (e) {
+            console.error('error writing to firestore db', e);
+    }}
 
     
     return (
