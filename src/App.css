@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+    --gray-200: rgb(206, 206, 206);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+    text-decoration: none;
+    color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/* Utilities  */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.App-link {
-  color: #61dafb;
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('./images/farmbg.jpg');
+    background-size: cover;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title-wrapper {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gray-200);
 }
+
+.title-first {
+    font-size: 15.5vw;
+    line-height: .85em;
+    color: white;
+    margin-top: .025em;
+}
+.title-second {
+    font-size: 7vw;
+    font-style: italic;
+    color: white;
+}
+
+.underline {
+    width: 10vw;
+    margin: 0 auto;
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
+
+.underline-inverted {
+    transform: rotate(180deg);
+}
+
+/* Page Menu  */
+
+.page-menu {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.page-menu > * {
+    font-variant: small-caps;
+    font-size: 1.25rem;
+    width: fit-content;
+    margin: 1em 0;
+}
+
+
+
