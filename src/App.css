@@ -8,6 +8,7 @@
     --gray-200: rgb(206, 206, 206);
 }
 
+
 a {
     text-decoration: none;
     color: black;
@@ -77,5 +78,41 @@ a {
     margin: 1em 0;
 }
 
+/* Input Form  */
 
+.file-input-form {
+    margin: 3rem 0;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.file-input-form h1 {
+    font-size: 5rem;
+    font-variant: petite-caps;
+}
+
+.file-input-form .underline {
+    filter: invert(0);
+}
+
+.file-input {
+    opacity: 0;    
+}
+
+.file-input-button {
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    width: fit-content;
+    padding: 1em 2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.file-input-button:hover {
+    transform: scale(1.05);
+}
