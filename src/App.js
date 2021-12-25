@@ -2,6 +2,7 @@
 import './App.css';
 
 import underline from './underline.png';
+import pattern1 from './pattern2.jpg';
 import Home from './components/Home'
 import Family from './components/Family';
 import Farm from './components/Farm';

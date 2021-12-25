@@ -1,6 +1,5 @@
 import React from 'react'
 import PhotoGallery from './PhotoGallery'
-import { storage } from '../firebase'
 
 const Family = () => {
     return (
