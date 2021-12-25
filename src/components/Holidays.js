@@ -1,9 +1,10 @@
 import React from 'react'
+import PhotoGallery from './PhotoGallery'
 
 const Holidays = () => {
     return (
         <div>
-            Holidays Page
+            <PhotoGallery page="holidays" />
         </div>
     )
 }

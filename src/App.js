@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <div className='hero'>
+      <div className='hero' id="hero">
         <div className="title-wrapper">
           <img className='underline underline-inverted' src={underline} alt="decorative overline" />
           <Link to="/" className='title-first'>HOLYFIELD</Link>
@@ -59,6 +59,10 @@ function App() {
           <Route path="/upload" element={<UploadPhotos />} />
         </Routes>
       </Router>
+      <div className="footer flex">
+        <p>2021 Holyfield Farms. All rights reserved.</p>
+        <a href="#hero">Back to Top</a>
+      </div>
     </div>
   );
 }

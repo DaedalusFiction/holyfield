@@ -21,7 +21,7 @@ const UploadPhotoButton = ({file, setFile}) => {
     });
     
     const handleChange = (e) => {
-        
+        //updates checkedState when checkboxes are checked
         let newCheckedState = checkedState;
         for (const property in checkedState) {
             if (e.target.id === property) {
@@ -40,14 +40,37 @@ const UploadPhotoButton = ({file, setFile}) => {
         const storageRef = ref(storage, file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        getDownloadURL(uploadTask.snapshot.ref)
-        .then((downloadURL) => {
-            console.log('File available at', downloadURL);
-            addDoc(collection(db, "photos"), {
-            URL: downloadURL,
-            categories: checkedState
-          });
-        });
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                case 'paused':
+                    console.log('Upload is paused');
+                    break;
+                case 'running':
+                    console.log('Upload is running');
+                    break;
+                }
+            }, 
+            (error) => {
+                console.log(error);
+            }, 
+            () => {
+                // creates firestore database entry
+                getDownloadURL(uploadTask.snapshot.ref)
+                    .then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                        addDoc(collection(db, "photos"), {
+                        URL: downloadURL,
+                        categories: checkedState
+                    });
+                    });
+                });
+
+        
         
           
           

@@ -6,26 +6,30 @@ import { useEffect, useState } from 'react'
 
 const PhotoGallery = ({ page }) => {
     const [URLs, setURLs] = useState([]);
+    const [largePhoto, setLargePhoto] = useState(null);
     useEffect( async () => {
         const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true));
         const newURLs = [];
-        console.log(q);
+        
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             newURLs.push(doc.data().URL);
-            console.log(doc.data().URL)
+            
         })
         setURLs(newURLs)
     }, [])
 
+    const handleClick = (e) => {
+        setLargePhoto(e.target.src)
+    }
     
 
     return (
-        <div className='container'>
-            <h2>{page} photos</h2>
+        <div className='container gallery'>
+            <h2>{page}</h2>
             <div className='photos'>
                 {URLs.map((URL) => {
-                    return <img key={URL} src={URL} alt="page photo" />
+                    return <img className={URL === largePhoto ? "largePhoto" : ""} key={URL} src={URL} onClick={handleClick} alt="page photo" />
                 })}
             </div>
 

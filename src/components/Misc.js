@@ -1,9 +1,10 @@
 import React from 'react'
+import PhotoGallery from './PhotoGallery'
 
 const Misc = () => {
     return (
         <div>
-            Misc Page
+            <PhotoGallery page="misc" />
         </div>
     )
 }

@@ -1,9 +1,10 @@
 import React from 'react'
+import PhotoGallery from './PhotoGallery'
 
 const Food = () => {
     return (
         <div>
-          Food Page  
+          <PhotoGallery page="food" />
         </div>
     )
 }
