@@ -5,18 +5,23 @@ import { useEffect, useState } from 'react'
 
 
 const PhotoGallery = ({ page }) => {
+    const [photoDatas, setPhotoDatas] = useState(new Array(20).fill({}));
     const [URLs, setURLs] = useState([]);
     const [largePhoto, setLargePhoto] = useState(null);
     useEffect( async () => {
         const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true));
         const newURLs = [];
+        const newPhotoDatas = [];
         
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
             newURLs.push(doc.data().URL);
+            newPhotoDatas.push(doc.data());
             
         })
-        setURLs(newURLs)
+        setURLs(newURLs);
+        setPhotoDatas(newPhotoDatas);
+        console.log(newPhotoDatas);
     }, [])
 
     const handleClick = (e) => {
@@ -28,8 +33,13 @@ const PhotoGallery = ({ page }) => {
         <div className='container gallery'>
             <h2>{page}</h2>
             <div className='photos'>
-                {URLs.map((URL) => {
-                    return <img className={URL === largePhoto ? "largePhoto" : ""} key={URL} src={URL} onClick={handleClick} alt="page photo" />
+                {URLs.map((URL, index) => {
+                    return <div>
+                            <p>{"title" in photoDatas[index] ? photoDatas[index].title : "" }</p>
+                            <img className={URL === largePhoto ? "largePhoto" : ""} key={URL} src={URL} onClick={handleClick} alt="page photo" />
+                            {photoDatas[index].comment ? <q>{photoDatas[index].comment}</q> : <p></p>}
+                            
+                        </div>
                 })}
             </div>
 

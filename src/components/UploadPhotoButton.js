@@ -19,7 +19,8 @@ const UploadPhotoButton = ({file, setFile}) => {
         food: false,
         misc: false
     });
-    
+    const [comment, setComment] = useState("");
+    const [title, setTitle] = useState("")
     const handleChange = (e) => {
         //updates checkedState when checkboxes are checked
         let newCheckedState = checkedState;
@@ -33,6 +34,15 @@ const UploadPhotoButton = ({file, setFile}) => {
         
         setCheckedState(newCheckedState);
         
+    }
+
+    const updateTitle = (e) => {
+        setTitle(e.target.value);
+        console.log(e.target.value);
+    }
+
+    const updateComment = (e) => {
+        setComment(e.target.value);
     }
 
     const handleClick = async (e) => {
@@ -65,7 +75,9 @@ const UploadPhotoButton = ({file, setFile}) => {
                         console.log('File available at', downloadURL);
                         addDoc(collection(db, "photos"), {
                         URL: downloadURL,
-                        categories: checkedState
+                        title: title,
+                        categories: checkedState,
+                        comment: comment
                     });
                     });
                 });
@@ -87,6 +99,8 @@ const UploadPhotoButton = ({file, setFile}) => {
                                 <label htmlFor={category}>{category}</label>
                             </li>
                 })}
+                <input type="text" onChange={updateTitle} placeholder='Enter a Title (optional)' />
+                <input type="text" onChange={updateComment} placeholder='Enter a description (optional)'/>
             </ul>
             <button onClick={handleClick}>upload</button>
         </div>

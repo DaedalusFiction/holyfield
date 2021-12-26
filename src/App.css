@@ -17,7 +17,7 @@ a {
 
 h2 {
     font-size: 5rem;
-    margin: .5em 0;
+    margin: .5em 15vw .5em 0;
 }
 
 
@@ -26,6 +26,7 @@ h2 {
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .flex {
@@ -82,9 +83,10 @@ h2 {
 /* Page Menu  */
 
 .page-menu {
-    display: flex;
+    display: grid;
     width: 90%;
-    justify-content: space-between;
+    gap: 1rem;
+    grid-template-columns: repeat( auto-fit, minmax(75px, 1fr) );
     margin: 2rem auto;
 }
 
@@ -154,10 +156,22 @@ h2 {
 }
 
 
-.photos > * {
+.photos img {
     height: auto;
     max-width: 250px;
     margin: 0 auto;
+}
+
+.photos p,
+.photos q {
+    max-width: 250px;
+    display: block;
+    text-align: center;
+}
+
+.photos q {
+    color: rgb(37, 37, 37);
+    font-style: italic;
 }
 
 .footer {
@@ -171,5 +185,5 @@ h2 {
 }
 
 .largePhoto {
-    width: 50px;
+    
 }
