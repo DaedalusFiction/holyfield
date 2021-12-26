@@ -1,6 +1,6 @@
 import React from 'react'
 import { db, storage } from '../firebase'
-import { doc, collection, query, where, getDocs  } from 'firebase/firestore'
+import { doc, collection, query, where, getDocs, orderBy, limit  } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 
@@ -9,7 +9,7 @@ const PhotoGallery = ({ page }) => {
     const [URLs, setURLs] = useState([]);
     const [largePhoto, setLargePhoto] = useState(null);
     useEffect( async () => {
-        const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true));
+        const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true), limit(30));
         const newURLs = [];
         const newPhotoDatas = [];
         
@@ -25,7 +25,8 @@ const PhotoGallery = ({ page }) => {
     }, [])
 
     const handleClick = (e) => {
-        setLargePhoto(e.target.src)
+        setLargePhoto(e.target.src);
+
     }
     
 
@@ -37,6 +38,7 @@ const PhotoGallery = ({ page }) => {
                     return <div>
                             <p>{"title" in photoDatas[index] ? photoDatas[index].title : "" }</p>
                             <img className={URL === largePhoto ? "largePhoto" : ""} key={URL} src={URL} onClick={handleClick} alt="page photo" />
+                            {/* <div className="photo-options">+</div> */}
                             {photoDatas[index].comment ? <q>{photoDatas[index].comment}</q> : <p></p>}
                             
                         </div>

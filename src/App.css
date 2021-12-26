@@ -155,12 +155,28 @@ h2 {
     
 }
 
+.photo-options {
+    width: fit-content;
+    color: rgb(231, 231, 231);
+    background-color: rgb(41, 41, 41);
+    border-radius: 50px;
+    padding: .5rem;
+    
+}
 
 .photos img {
     height: auto;
     max-width: 250px;
     margin: 0 auto;
+    
 }
+
+/* .photos img:hover {
+    z-index: 1;
+} */
+
+
+
 
 .photos p,
 .photos q {
@@ -185,5 +201,5 @@ h2 {
 }
 
 .largePhoto {
-    
+    border-radius: 5px;
 }
