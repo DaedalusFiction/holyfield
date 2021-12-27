@@ -24,26 +24,25 @@ const PhotoGallery = ({ page }) => {
         console.log(newPhotoDatas);
     }, [])
 
+    
+    const resetGallery = (e) => {
+        if (e.target.src === largePhoto) {return}
+        else if (largePhoto != null) {setLargePhoto(null)}
+    }
+    
     const handleClick = (e) => {
         setLargePhoto(e.target.src);
     }
 
-    const resetGallery = (e) => {
-        if (e.target.src === largePhoto) {return}
-        else if (largePhoto != null) {setLargePhoto(null)}
-        
-    }
-    
-
     return (
-        <div className='container gallery' onClick={resetGallery}>
+        <div className={largePhoto ? 'blurred container gallery' : 'container gallery'} onClick={resetGallery}>
             <h2>{page}</h2>
             <div className='photos'>
                 {URLs.map((URL, index) => {
-                    return <div className={URL === largePhoto ? "largePhoto" : ""}>
-                            <p>{"title" in photoDatas[index] ? photoDatas[index].title : "" }</p>
+                    return <div className={URL === largePhoto ? "largePhoto" : ""} id={URL == largePhoto ? "largePhoto" : "smallPhoto"}>
+                            {"title" in photoDatas[index] && <p>{photoDatas[index].title}</p> }
                             <img  key={URL} src={URL} onClick={handleClick} alt="page photo" />
-                            {photoDatas[index].comment ? <q>{photoDatas[index].comment}</q> : <p></p>}
+                            {photoDatas[index].comment && <q>{photoDatas[index].comment}</q> }
                             
                         </div>
                 })}
