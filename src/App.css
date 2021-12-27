@@ -103,6 +103,14 @@ h2 {
     margin: 0 auto;
 }
 
+/* Home page  */
+
+.home p {
+    font-size: 1.5rem;
+    max-width: 30em;
+    margin: 1em auto;
+}
+
 
 
 /* Input Form  */

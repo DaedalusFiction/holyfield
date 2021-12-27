@@ -2,7 +2,6 @@
 import './App.css';
 
 import underline from './underline.png';
-import pattern1 from './pattern2.jpg';
 import Home from './components/Home'
 import Family from './components/Family';
 import Farm from './components/Farm';
@@ -20,13 +19,6 @@ import {
 
 
 function App() {
-  // const photoCollection = collection(db, 'photos');
-  // const getPhotos = async () => {
-  //   const photosSnapshot = await getDocs(photoCollection);
-  //   const photos = photosSnapshot.docs.map(doc => doc.data());
-  //   console.log(photos)
-  //   return photos;
-  // }
 
   return (
     <div className="App">
