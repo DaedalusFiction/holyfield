@@ -92,17 +92,17 @@ const UploadPhotoButton = ({file, setFile}) => {
     
     return (
         <div>
-            <ul>
+            <div className='flex categories-list'>
                 {categories.map((category) => {
-                    return <li key={category}>
+                    return <label className='checkbox' key={category}>
                                 <input type="checkbox" id={category} name={category} key={category} onChange={handleChange}/>
-                                <label htmlFor={category}>{category}</label>
-                            </li>
+                                <span htmlFor={category}>{category}</span>
+                            </label>
                 })}
-                <input type="text" onChange={updateTitle} placeholder='Enter a Title (optional)' />
-                <input type="text" onChange={updateComment} placeholder='Enter a description (optional)'/>
-            </ul>
-            <button onClick={handleClick}>upload</button>
+                <input type="text" onChange={updateTitle} placeholder='Enter Title (optional)' />
+                <input type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
+            </div>
+            <button className="upload-button" onClick={handleClick}>Upload</button>
         </div>
     )
 }

@@ -116,6 +116,10 @@ h2 {
     align-items: center;
 }
 
+.file-input-form p {
+    font-size: 1.25rem;
+}
+
 .file-input-form h1 {
     font-size: 5rem;
     font-variant: petite-caps;
@@ -132,11 +136,12 @@ h2 {
     position: absolute;    
 }
 
-.file-input-button {
+.file-input-button,
+.upload-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(95, 95, 95);
+    background-color: rgb(65, 65, 65);
     color: white;
     font-size: 1.5rem;
     height: 2em;
@@ -147,9 +152,67 @@ h2 {
     transition: 200ms;
 }
 
-.file-input-button:hover {
-    transform: scale(1.05);
+.file-input-button:hover,
+.upload-button:hover {
+    background-color: black;
 }
+
+/* File Upload Button  */
+
+.categories-list {
+    flex-direction: column;
+    margin: 1em 0;
+}
+
+
+
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox > span {
+    font-size: 1.4rem;
+    padding: .25em .5em;
+    text-transform: capitalize;
+    
+}
+
+.checkbox > input {
+    height: 1rem;
+    width: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 2px;
+    background-color: rgb(214, 214, 214);
+    cursor: pointer;
+  }
+
+.checkbox > input:checked {
+    background-color: rgb(29, 29, 29);
+}
+
+input[type="text"] {
+    font-size: 1rem;
+    margin: .25em 0;
+    padding: .5em .75em;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.upload-button {
+    
+}
+
+
+
 
 /* Photos */
 
