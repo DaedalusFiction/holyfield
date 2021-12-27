@@ -173,9 +173,9 @@ h2 {
 
 .photos img {
     height: auto;
-    max-width: 250px;
+    width: 100%;
     margin: 0 auto;
-    
+    transition: 500ms ease-in;
 }
 
 /* .photos img:hover {
@@ -207,6 +207,10 @@ h2 {
     margin: 1em 2em;
 }
 
-.largePhoto {
-    border-radius: 5px;
+.largePhoto img {
+    position: fixed;
+    width: 50vw !important;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
 }

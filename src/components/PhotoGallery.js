@@ -26,19 +26,23 @@ const PhotoGallery = ({ page }) => {
 
     const handleClick = (e) => {
         setLargePhoto(e.target.src);
+    }
 
+    const resetGallery = (e) => {
+        if (e.target.src === largePhoto) {return}
+        else if (largePhoto != null) {setLargePhoto(null)}
+        
     }
     
 
     return (
-        <div className='container gallery'>
+        <div className='container gallery' onClick={resetGallery}>
             <h2>{page}</h2>
             <div className='photos'>
                 {URLs.map((URL, index) => {
-                    return <div>
+                    return <div className={URL === largePhoto ? "largePhoto" : ""}>
                             <p>{"title" in photoDatas[index] ? photoDatas[index].title : "" }</p>
-                            <img className={URL === largePhoto ? "largePhoto" : ""} key={URL} src={URL} onClick={handleClick} alt="page photo" />
-                            {/* <div className="photo-options">+</div> */}
+                            <img  key={URL} src={URL} onClick={handleClick} alt="page photo" />
                             {photoDatas[index].comment ? <q>{photoDatas[index].comment}</q> : <p></p>}
                             
                         </div>
