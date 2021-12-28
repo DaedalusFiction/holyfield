@@ -8,7 +8,7 @@ const PhotoGallery = ({ page }) => {
     const [photoDatas, setPhotoDatas] = useState(new Array(30).fill({}));
     const [URLs, setURLs] = useState([]);
     const [largePhoto, setLargePhoto] = useState(null);
-    
+
     useEffect( () => {
         async function getPhotos() {
             const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true), limit(30));
@@ -45,9 +45,9 @@ const PhotoGallery = ({ page }) => {
             <div className='photos'>
                 {URLs.map((URL, index) => {
                     return <div key={URL} className={URL === largePhoto ? "largePhoto" : ""} id={URL === largePhoto ? "largePhoto" : "smallPhoto"}>
+                            <img key={URL} src={URL} onClick={handleClick} alt="page" />
                             {"title" in photoDatas[index] && <p>{photoDatas[index].title}</p> }
-                            <img  key={URL} src={URL} onClick={handleClick} alt="page" />
-                            {photoDatas[index].comment && <q>{photoDatas[index].comment}</q> }
+                            {photoDatas[index].comment && <p>{photoDatas[index].comment}</p> }
                             
                         </div>
                 })}
