@@ -1,8 +1,7 @@
 import React from 'react'
 import { uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage'
-import { storage } from '../firebase'
-import { db } from '../firebase'
-import { doc, collection, Timestamp, setDoc } from 'firebase/firestore'
+import { storage, db } from '../firebase'
+import { doc, Timestamp, setDoc } from 'firebase/firestore'
 import { useState } from 'react'
 
 

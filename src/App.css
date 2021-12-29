@@ -222,6 +222,23 @@ input[type="text"] {
     font-variant: small-caps;
 }
 
+.gallery button {
+    font-size: 1rem;
+    margin: 0 .5em;
+    padding: .25em .5em;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(221, 221, 221);
+    box-shadow: .15em .15em .15em .1em rgba(0, 0, 0, 0.25) ;
+}
+
+.reversed {
+    background-color: rgb(46, 46, 46) !important;
+    color: rgb(216, 216, 216) !important;
+}
+
+
+
 .photos {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );

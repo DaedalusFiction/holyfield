@@ -3,7 +3,7 @@ import PhotoGallery from './PhotoGallery'
 
 const Family = () => {
     return (
-        <div className='container'>
+        <div>
             <PhotoGallery page="family" />
         </div>
     )

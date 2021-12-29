@@ -8,6 +8,7 @@ const PhotoGallery = ({ page }) => {
     const [photoDatas, setPhotoDatas] = useState(new Array(30).fill({}));
     const [URLs, setURLs] = useState([]);
     const [largePhoto, setLargePhoto] = useState(null);
+    const [reversed, setReversed] = useState(false);
 
     useEffect( () => {
         async function getPhotos() {
@@ -29,6 +30,21 @@ const PhotoGallery = ({ page }) => {
 
     }, [page])
 
+    const oldestFirst = (e) => {
+        if (!reversed) {
+            setURLs(URLs.reverse());
+            setPhotoDatas(photoDatas.reverse());
+            setReversed(true);
+        }
+    }
+
+    const newestFirst = () => {
+        if (reversed) {
+            setURLs(URLs.reverse());
+            setPhotoDatas(photoDatas.reverse());
+            setReversed(false);
+        }
+    }
     
     const resetGallery = (e) => {
         if (e.target.src === largePhoto) {return}
@@ -43,6 +59,8 @@ const PhotoGallery = ({ page }) => {
         <div className={largePhoto ? 'blurred gallery' : 'gallery'} onClick={resetGallery}>
             <div className="container">
                 <h2>{page}</h2>
+                <button className={!reversed ? "reversed" : ''} onClick={newestFirst}>newest first</button>
+                <button className={reversed ? "reversed" : ''} onClick={oldestFirst}>oldest first</button>
                 <div className='photos'>
                     {URLs.map((URL, index) => {
                         return <div key={URL} className={URL === largePhoto ? "largePhoto" : ""} id={URL === largePhoto ? "largePhoto" : "smallPhoto"}>
