@@ -28,7 +28,7 @@ const UploadPhotos = () => {
             <form className='file-input-form'>
                 <h1>Upload Files</h1>
                 <img src={underline} className='underline' alt="decorative underline" />
-                <label htmlFor='file-input' className='file-input-button'>Select File to Upload</label>
+                <label htmlFor='file-input' className='file-input-button'>Select File</label>
                 <input type="file" id='file-input' className='file-input' accept="image/png, image/jpeg" onChange={changeHandler}/>
                 {file && <p>{file.name}</p>}
                 {file && <UploadPhotoButton file={file} setFile={setFile} />}

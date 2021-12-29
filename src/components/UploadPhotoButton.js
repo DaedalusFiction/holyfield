@@ -2,8 +2,7 @@ import React from 'react'
 import { uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage'
 import { storage } from '../firebase'
 import { db } from '../firebase'
-import { addDoc} from 'firebase/firestore'
-import { collection } from 'firebase/firestore'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
 import { useState } from 'react'
 
 
@@ -53,7 +52,6 @@ const UploadPhotoButton = ({file, setFile}) => {
                 // Observe state change events such as progress, pause, and resume
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                
             }, 
             (error) => {
                 console.log(error);
@@ -64,6 +62,7 @@ const UploadPhotoButton = ({file, setFile}) => {
                     .then((downloadURL) => {
                         addDoc(collection(db, "photos"), {
                         URL: downloadURL,
+                        uploaded: Timestamp.fromDate(new Date(Date.now())),
                         title: title,
                         categories: checkedState,
                         comment: comment

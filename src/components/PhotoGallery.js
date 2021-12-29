@@ -1,6 +1,6 @@
 import React from 'react'
 import { db } from '../firebase'
-import { collection, query, where, getDocs, limit  } from 'firebase/firestore'
+import { collection, query, where, getDocs, limit, orderBy  } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 
@@ -11,7 +11,7 @@ const PhotoGallery = ({ page }) => {
 
     useEffect( () => {
         async function getPhotos() {
-            const q = query(collection(db, "photos"), where(`categories.${page}`, "==", true), limit(30));
+            const q = query(collection(db, "photos"), orderBy("uploaded"), where(`categories.${page}`, "==", true), limit(30));
             const newURLs = [];
             const newPhotoDatas = [];
             
@@ -20,9 +20,9 @@ const PhotoGallery = ({ page }) => {
                 newURLs.push(doc.data().URL);
                 newPhotoDatas.push(doc.data());
             })
-    
-            setURLs(newURLs);
-            setPhotoDatas(newPhotoDatas);
+            
+            setURLs(newURLs.reverse());
+            setPhotoDatas(newPhotoDatas.reverse());
         }
 
         getPhotos();
@@ -40,17 +40,18 @@ const PhotoGallery = ({ page }) => {
     }
 
     return (
-        <div className={largePhoto ? 'blurred container gallery' : 'container gallery'} onClick={resetGallery}>
-            <h2>{page}</h2>
-            <div className='photos'>
-                {URLs.map((URL, index) => {
-                    return <div key={URL} className={URL === largePhoto ? "largePhoto" : ""} id={URL === largePhoto ? "largePhoto" : "smallPhoto"}>
-                            <img key={URL} src={URL} onClick={handleClick} alt="page" />
-                            {"title" in photoDatas[index] && <p>{photoDatas[index].title}</p> }
-                            {photoDatas[index].comment && <p>{photoDatas[index].comment}</p> }
-                            
-                        </div>
-                })}
+        <div className={largePhoto ? 'blurred gallery' : 'gallery'} onClick={resetGallery}>
+            <div className="container">
+                <h2>{page}</h2>
+                <div className='photos'>
+                    {URLs.map((URL, index) => {
+                        return <div key={URL} className={URL === largePhoto ? "largePhoto" : ""} id={URL === largePhoto ? "largePhoto" : "smallPhoto"}>
+                                <img key={URL} src={URL} onClick={handleClick} alt="page" />
+                                {"title" in photoDatas[index] && largePhoto && <p>{photoDatas[index].title}</p> }
+                                {photoDatas[index].comment && largePhoto && <p>{photoDatas[index].comment}</p> }
+                            </div>
+                    })}
+                </div>
             </div>
 
         </div>

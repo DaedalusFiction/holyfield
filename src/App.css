@@ -17,7 +17,6 @@ a {
 
 h2 {
     font-size: 5rem;
-    margin: .5em 15vw .5em 0;
 }
 
 
@@ -87,17 +86,15 @@ h2 {
 /* Page Menu  */
 
 .page-menu {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 90%;
     gap: 1rem;
-    grid-template-columns: repeat( auto-fit, minmax(75px, 1fr) );
     margin: 2rem auto;
 }
 
 .page-menu > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-variant: small-caps;
     font-size: 1.25rem;
     margin: 0 auto;
@@ -220,7 +217,7 @@ input[type="text"] {
 /* Photos */
 
 .gallery h2 {
-    text-align: end;
+    /* text-align: center; */
     text-transform: capitalize;
     font-variant: small-caps;
 }
@@ -229,7 +226,7 @@ input[type="text"] {
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
     gap: 1rem;
-    
+    margin: 2rem 0;
 }
 
 .photo-options {
@@ -249,20 +246,23 @@ input[type="text"] {
     filter: none !important;
     z-index: 3;
     background-color: white;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .largePhoto img {
     max-height: 90vh !important;
+    cursor: pointer;
 }
 
-.photos img:not(.largePhoto) {
+.photos img:not(.largePhoto img) {
     object-fit: cover;
     object-position: center;
     width: 100%;
+    max-width: 350px;
     height: auto;
     max-height: 200px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 
