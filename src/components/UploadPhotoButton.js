@@ -2,7 +2,7 @@ import React from 'react'
 import { uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage'
 import { storage } from '../firebase'
 import { db } from '../firebase'
-import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { doc, collection, Timestamp, setDoc } from 'firebase/firestore'
 import { useState } from 'react'
 
 
@@ -45,6 +45,7 @@ const UploadPhotoButton = ({file, setFile}) => {
     const handleClick = async (e) => {
         e.preventDefault();
         const storageRef = ref(storage, file.name);
+        console.log("file name: " + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed', 
@@ -60,7 +61,7 @@ const UploadPhotoButton = ({file, setFile}) => {
                 // creates firestore database entry
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
-                        addDoc(collection(db, "photos"), {
+                        setDoc(doc(db, "photos", file.name), {
                         URL: downloadURL,
                         uploaded: Timestamp.fromDate(new Date(Date.now())),
                         title: title,
