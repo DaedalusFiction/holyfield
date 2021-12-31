@@ -17,7 +17,9 @@ const UploadPhotoButton = ({file, setFile}) => {
         misc: false
     });
     const [comment, setComment] = useState("");
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("");
+    const [uploadProgress, setUploadProgress] = useState(0);
+
     const handleChange = (e) => {
         //updates checkedState when checkboxes are checked
         let newCheckedState = checkedState;
@@ -51,13 +53,17 @@ const UploadPhotoButton = ({file, setFile}) => {
             (snapshot) => {
                 // Observe state change events such as progress, pause, and resume
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                 setUploadProgress(progress);
+                 console.log(progress);
             }, 
             (error) => {
                 console.log(error);
             }, 
             () => {
                 // creates firestore database entry
+                setFile(null);
+                setUploadProgress(0);
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
                         setDoc(doc(db, "photos", file.name), {
@@ -69,7 +75,7 @@ const UploadPhotoButton = ({file, setFile}) => {
                     });
                     });
                 });
-        setFile(null);
+        
     }
     
     return (
@@ -85,6 +91,7 @@ const UploadPhotoButton = ({file, setFile}) => {
                 <input type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
             </div>
             <button className="upload-button" onClick={handleClick}>Upload</button>
+            {uploadProgress > 0 && <p>Upload Progress: {uploadProgress.toFixed(2)}%</p>}
         </div>
     )
 }
