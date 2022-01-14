@@ -33,12 +33,16 @@ const UploadPhotos = ( currentUser, login ) => {
             setFile(null);
             setRecipePhoto(null);
             setFileExistsError(true);
+        } else if (!acceptedTypes.includes(selected.type)) {
+            setFileTypeError(true);
         } else if (folder === "photos") {
             setFile(selected);
             setFileExistsError(false);
+            setFileTypeError(false);
         } else {
             setRecipePhoto(selected);
             setFileExistsError(false);
+            setFileTypeError(false);
         }
         
 

@@ -81,6 +81,7 @@ const UploadRecipeButton = ({recipePhoto, setRecipePhoto, setUploadProgress}) =>
     return (
         <div>
             <div className='flex categories-list'>
+                <p>Please select at least one:</p>
                 {categories.map((category) => {
                     return <label className='checkbox' key={category}>
                                 <input type="checkbox" id={category} name={category} key={category} onChange={handleChange}/>

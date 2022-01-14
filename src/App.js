@@ -32,12 +32,11 @@ function App() {
   }, [largePhoto])
 
     const login = () => {
-
-        console.log("attempting login");
         signInWithPopup(auth, provider)
             .then(async (result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
+                GoogleAuthProvider.credentialFromResult(result);
+                
                 // const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
@@ -71,9 +70,9 @@ function App() {
       e.preventDefault();
       signOut(auth).then(() => {
         setCurrentUser(null);
-        console.log("signed out")
       }).catch((error) => {
-        console.log("error signing out")
+        console.log("error signing out");
+        console.log(error);
       });
     }
 

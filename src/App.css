@@ -7,6 +7,8 @@
 
 :root {
     --gray-200: rgb(206, 206, 206);
+    --gray-800: rgb(65, 65, 65);
+    --gray-900: rgb(29, 29, 29);
 }
 
 
@@ -25,6 +27,11 @@ li {
 
 textarea {
     padding: 1em;
+}
+
+button {
+    border: none;
+    background-color: inherit;
 }
 
 
@@ -164,7 +171,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(65, 65, 65);
+    background-color: var(--gray-800);
     color: white;
     font-size: 1.5rem;
     height: 2em;
@@ -214,15 +221,16 @@ textarea {
     border: 1px solid black;
     outline: none;
     border-radius: 2px;
-    background-color: rgb(214, 214, 214);
+    background-color: var(--gray-200);
     cursor: pointer;
   }
 
 .checkbox > input:checked {
-    background-color: rgb(29, 29, 29);
+    background-color: var(--gray-900);
 }
 
-input[type="text"] {
+input[type="text"],
+textarea[type="text"] {
     font-size: 1rem;
     margin: .25em 0;
     padding: .5em .75em;
@@ -240,23 +248,39 @@ input[type="text"] {
     font-variant: small-caps;
 }
 
-.gallery button, 
-.recipes button {
+.gallery button:not(.recipe-link), 
+.course-buttons button {
     font-size: 1rem;
     margin: 0 .5em;
     padding: .25em .5em;
     border: none;
     border-radius: 5px;
-    background-color: rgb(221, 221, 221);
+    background-color: var(--gray-200);
     box-shadow: .15em .15em .15em .1em rgba(0, 0, 0, 0.25) ;
     cursor: pointer;
     transition: 150ms;
 }
 
 .reversed,
-.gallery button:hover {
-    background-color: rgb(46, 46, 46) !important;
-    color: rgb(216, 216, 216) !important;
+.gallery button:hover:not(.recipe-link) {
+    background-color: var(--gray-800) !important;
+    color: var(--gray-200) !important;
+}
+
+.recipe-links {
+    margin: 2em 2em;
+}
+
+.recipe-link {
+    font-size: 1.25rem;
+    text-transform: capitalize;
+    font-weight: bold;
+    margin: .5em 0;
+    cursor: pointer;
+}
+
+.recipe-link:hover {
+    border-bottom: 2px solid black;
 }
 
 
@@ -270,8 +294,8 @@ input[type="text"] {
 
 .photo-options {
     width: fit-content;
-    color: rgb(231, 231, 231);
-    background-color: rgb(41, 41, 41);
+    color: var(--gray-200);
+    background-color: var(--gray-800);
     border-radius: 50px;
     padding: .5rem;
     
@@ -285,7 +309,6 @@ input[type="text"] {
     filter: none !important;
     z-index: 3;
     background-color: white;
-    /* border-radius: 5px; */
 }
 
 .largePhoto img {
@@ -319,7 +342,7 @@ input[type="text"] {
     text-transform: none;
     font-weight: normal;
     margin: .25em auto;
-    color: rgb(80, 80, 80);
+    color: var(--gray-800);
 }
 
 
@@ -361,11 +384,11 @@ input[type="text"] {
 
 .footer {
     justify-content: space-between;
-    background-color: rgb(32, 32, 32);
+    background-color: var(--gray-800)
 }
 
 .footer > * {
-    color: rgb(231, 228, 228);
+    color: var(--gray-200);
     margin: 1em 2em;
 }
 

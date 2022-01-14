@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react'
 import Recipe from './Recipe'
 
 
-const RecipesGallery = ({ page, largePhoto, setLargePhoto, resetGallery }) => {
+const RecipesGallery = ({ page }) => {
     const categories = ["appetizer", "main", "dessert", "snack", "other"];
     const [course, setCourse] = useState("appetizer");
     const [photoDatas, setPhotoDatas] = useState(new Array(30).fill({}));
-    const [URLs, setURLs] = useState([]);
     const [selected, setSelected] = useState("appetizer");
     const [examinedRecipe, setExaminedRecipe] = useState(null);
 
@@ -25,7 +24,6 @@ const RecipesGallery = ({ page, largePhoto, setLargePhoto, resetGallery }) => {
                 newPhotoDatas.push(doc.data());
             })
             
-            setURLs(newURLs.reverse());
             setPhotoDatas(newPhotoDatas.reverse());
         }
 
@@ -50,27 +48,24 @@ const RecipesGallery = ({ page, largePhoto, setLargePhoto, resetGallery }) => {
         setExaminedRecipe(null);
     }
     
-    
-    
-    
-    const enlargePhoto = (e) => {
-        setLargePhoto(e.target.src);
-    }
 
     return (
-        <div className='gallery recipes'>
+        <div className='gallery'>
             <div className="container">
                 <h2>{page}</h2>
-                {categories.map((course) => {
-                    return <button id={course} key={course} className={selected === course ? "reversed " + course : course} onClick={selectCourse}>{course}</button>
-                })}
-                {!examinedRecipe && <ul className=''>
+                <div className="course-buttons">
+                    {categories.map((course) => {
+                        return <button id={course} key={course} className={selected === course ? "reversed " + course : course} onClick={selectCourse}>{course}</button>
+                    })}
+                    {examinedRecipe && <button onClick={goBack}>Go Back</button>}
+                </div>
+                {!examinedRecipe && <ul className='recipe-links'>
                     {photoDatas.map((photoData, index) => {
-                        return <li key={index}><button id={index} onClick={examine}>{photoDatas[index].title}</button></li>
+                        return <li key={index}><button className="recipe-link" id={index} onClick={examine}>{photoDatas[index].title}</button></li>
                      })}
                 </ul>}
 
-                {examinedRecipe && <button onClick={goBack}>Go Back</button>}
+                
                 {examinedRecipe && <Recipe examinedRecipe={examinedRecipe}  />}
             </div>
 
