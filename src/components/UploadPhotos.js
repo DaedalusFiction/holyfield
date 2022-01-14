@@ -21,14 +21,15 @@ const UploadPhotos = ( currentUser, login ) => {
     const changeHandler = async (e) => {
         if (e.target.files[0] == null) {return}
         const selected = e.target.files[0];
-        console.log(e.target.className)
+        
         const folder = e.target.id === "file-input" ? "photos" : "recipes";
-        console.log(folder);
-        // console.log(folder);
-        console.log(acceptedTypes.includes(selected.type));
+        const otherFolder = e.target.id === "file-input" ? "recipes" : "photos";
+        
         const fileRef = doc(db, folder, selected.name);
+        const otherFileRef = doc(db, otherFolder, selected.name);
         const docSnap = await getDoc(fileRef);
-        if (docSnap.exists()) {
+        const otherDocSnap = await getDoc(otherFileRef);
+        if (docSnap.exists() || otherDocSnap.exists()) {
             setFile(null);
             setRecipePhoto(null);
             setFileExistsError(true);
