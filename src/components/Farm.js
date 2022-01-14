@@ -1,10 +1,10 @@
 import React from 'react'
 import PhotoGallery from './PhotoGallery'
 
-const Farm = () => {
+const Farm = ({largePhoto, setLargePhoto}) => {
     return (
         <div>
-           <PhotoGallery page="farm" />
+           <PhotoGallery page="farm" largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>
         </div>
     )
 }

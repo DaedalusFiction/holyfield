@@ -19,6 +19,14 @@ h2 {
     font-size: 5rem;
 }
 
+li {
+    list-style: none;
+}
+
+textarea {
+    padding: 1em;
+}
+
 
 /* Utilities  */
 
@@ -104,8 +112,12 @@ h2 {
 
 .home p {
     font-size: 1.5rem;
-    max-width: 30em;
     margin: 1em auto;
+}
+
+.home p + p {
+    font-size: 1rem;
+    
 }
 
 
@@ -134,6 +146,10 @@ h2 {
     filter: invert(0);
 }
 
+.file-input-form .flex {
+    gap: 1rem;
+}
+
 .file-input {
     opacity: 0;
     width: 0.1px;
@@ -143,7 +159,8 @@ h2 {
 
 .file-input-button,
 .upload-button,
-.login button {
+.login button,
+.home button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,7 +240,8 @@ input[type="text"] {
     font-variant: small-caps;
 }
 
-.gallery button {
+.gallery button, 
+.recipes button {
     font-size: 1rem;
     margin: 0 .5em;
     padding: .25em .5em;
@@ -305,14 +323,40 @@ input[type="text"] {
 }
 
 
-
-
-
-
 .photos p {
     max-width: 250px;
     display: block;
     text-align: center;
+}
+
+/* Recipes  */
+
+.recipes {
+    margin: 3em auto;
+}
+
+.recipes li {
+    margin: 1em 0;
+}
+
+.recipe {
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe > * {
+    margin: .5em 0;
+}
+
+.recipe h3 {
+    font-size: 3rem;
+    font-variant: petite-caps;
+}
+
+.recipe img {
+    max-width: 500px;
+    height: auto;
+
 }
 
 .footer {

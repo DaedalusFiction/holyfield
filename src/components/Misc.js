@@ -1,10 +1,10 @@
 import React from 'react'
 import PhotoGallery from './PhotoGallery'
 
-const Misc = () => {
+const Misc = ({largePhoto, setLargePhoto}) => {
     return (
         <div>
-            <PhotoGallery page="misc" />
+            <PhotoGallery page="misc" largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>
         </div>
     )
 }

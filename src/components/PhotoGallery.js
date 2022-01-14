@@ -4,10 +4,9 @@ import { collection, query, where, getDocs, limit, orderBy  } from 'firebase/fir
 import { useEffect, useState } from 'react'
 
 
-const PhotoGallery = ({ page }) => {
+const PhotoGallery = ({ page, largePhoto, setLargePhoto }) => {
     const [photoDatas, setPhotoDatas] = useState(new Array(30).fill({}));
     const [URLs, setURLs] = useState([]);
-    const [largePhoto, setLargePhoto] = useState(null);
     const [reversed, setReversed] = useState(false);
 
     useEffect( () => {
@@ -46,17 +45,20 @@ const PhotoGallery = ({ page }) => {
         }
     }
     
-    const resetGallery = (e) => {
-        if (e.target.src === largePhoto) {return}
-        else if (largePhoto != null) {setLargePhoto(null)}
-    }
     
-    const handleClick = (e) => {
+    
+    const enlargePhoto = (e) => {
         setLargePhoto(e.target.src);
     }
 
+    
+
+
+
+
+
     return (
-        <div className={largePhoto ? 'blurred gallery' : 'gallery'} onClick={resetGallery}>
+        <div className={largePhoto ? 'blurred gallery' : 'gallery'} >
             <div className="container">
                 <h2>{page}</h2>
                 <button className={!reversed ? "reversed" : ''} onClick={newestFirst}>newest first</button>
@@ -64,8 +66,8 @@ const PhotoGallery = ({ page }) => {
                 <div className='photos'>
                     {URLs.map((URL, index) => {
                         return <div key={URL} className={URL === largePhoto ? "largePhoto" : ""} id={URL === largePhoto ? "largePhoto" : "smallPhoto"}>
-                                <img key={URL} src={URL} onClick={handleClick} alt="page" />
-                                {"title" in photoDatas[index] && largePhoto && <p>{photoDatas[index].title}</p> }
+                                <img key={URL} src={URL} onClick={enlargePhoto} alt="page" />
+                                {photoDatas[index].title && largePhoto && <p>{photoDatas[index].title}</p> }
                                 {photoDatas[index].comment && largePhoto && <p>{photoDatas[index].comment}</p> }
                             </div>
                     })}

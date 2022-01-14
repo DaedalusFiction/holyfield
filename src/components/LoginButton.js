@@ -1,8 +1,8 @@
 import React from 'react'
 
-const LoginButton = ({login}) => {
+const LoginButton = ({onClick}) => {
     return (
-        <button onClick={login}>Log In with Google</button>
+        <button onClick={onClick}>Log In with Google</button>
     )
 }
 

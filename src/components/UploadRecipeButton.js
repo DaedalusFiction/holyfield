@@ -6,18 +6,19 @@ import { useState } from 'react'
 
 
 
-const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
-    const categories = ["family", "farm", "holidays", "projects", "food", "misc"];
+const UploadRecipeButton = ({recipePhoto, setRecipePhoto, setUploadProgress}) => {
+    const categories = ["appetizer", "main", "dessert", "snack", "other"];
+    
     const [checkedState, setCheckedState] = useState({
-        family: false,
-        farm: false,
-        holidays: false,
-        projects: false,
-        food: false,
-        misc: false
+        appetizer: false,
+        main: false,
+        dessert: false,
+        snack: false,
+        other: false
     });
     const [comment, setComment] = useState("");
     const [title, setTitle] = useState("");
+    
 
     const handleChange = (e) => {
         //updates checkedState when checkboxes are checked
@@ -44,8 +45,9 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const storageRef = ref(storage, file.name);
-        const uploadTask = uploadBytesResumable(storageRef, file);
+        const storageRef = ref(storage, recipePhoto.name);
+        console.log("file name: " + recipePhoto.name);
+        const uploadTask = uploadBytesResumable(storageRef, recipePhoto);
 
         uploadTask.on('state_changed', 
             (snapshot) => {
@@ -53,22 +55,22 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                  setUploadProgress(progress);
-                 
+                 console.log(progress);
             }, 
             (error) => {
                 console.log(error);
             }, 
             () => {
                 // creates firestore database entry
-                setFile(null);
+                setRecipePhoto(null);
                 setUploadProgress(0);
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
-                        setDoc(doc(db, "photos", file.name), {
+                        setDoc(doc(db, "recipes", recipePhoto.name), {
                         URL: downloadURL,
                         uploaded: Timestamp.fromDate(new Date(Date.now())),
                         title: title,
-                        categories: checkedState,
+                        courses: checkedState,
                         comment: comment
                     });
                     });
@@ -85,12 +87,13 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
                                 <span htmlFor={category}>{category}</span>
                             </label>
                 })}
-                <input type="text" onChange={updateTitle} placeholder='Enter Title (optional)' />
-                <input type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
+                <input type="text" onChange={updateTitle} placeholder='Enter Title (required)' required/>
+                <textarea type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
             </div>
-            <button className="upload-button" onClick={handleClick}>Upload Photo</button>
+            <button className="upload-button" onClick={handleClick}>Upload Recipe</button>
+            
         </div>
     )
 }
 
-export default UploadPhotoButton
+export default UploadRecipeButton
