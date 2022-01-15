@@ -18,6 +18,7 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
     });
     const [comment, setComment] = useState("");
     const [title, setTitle] = useState("");
+    const [uploadError, setUploadError] = useState(false);
 
     const handleChange = (e) => {
         //updates checkedState when checkboxes are checked
@@ -43,20 +44,19 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
     }
 
     const handleClick = async (e) => {
+        //uploads photo to firebase storage and form data to firestore database
         e.preventDefault();
         const storageRef = ref(storage, file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed', 
             (snapshot) => {
-                // Observe state change events such as progress, pause, and resume
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //to show upload progress as percentage
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                  setUploadProgress(progress);
-                 
             }, 
             (error) => {
-                console.log(error);
+                setUploadError(true);
             }, 
             () => {
                 // creates firestore database entry
@@ -89,6 +89,7 @@ const UploadPhotoButton = ({file, setFile, setUploadProgress}) => {
                 <input type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
             </div>
             <button className="upload-button" onClick={handleClick}>Upload Photo</button>
+            {uploadError && <p>There was an error uploading the photo</p>}
         </div>
     )
 }

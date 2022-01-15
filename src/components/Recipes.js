@@ -1,4 +1,4 @@
-import React from 'react'
+
 import RecipesGallery from './RecipesGallery'
 
 const Recipes = ({largePhoto, setLargePhoto}) => {

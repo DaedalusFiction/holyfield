@@ -18,7 +18,7 @@ const UploadRecipeButton = ({recipePhoto, setRecipePhoto, setUploadProgress}) =>
     });
     const [comment, setComment] = useState("");
     const [title, setTitle] = useState("");
-    
+    const [uploadError, setUploadError] = useState(false);
 
     const handleChange = (e) => {
         //updates checkedState when checkboxes are checked
@@ -58,7 +58,7 @@ const UploadRecipeButton = ({recipePhoto, setRecipePhoto, setUploadProgress}) =>
                  console.log(progress);
             }, 
             (error) => {
-                console.log(error);
+                setUploadError(true);
             }, 
             () => {
                 // creates firestore database entry
@@ -92,7 +92,7 @@ const UploadRecipeButton = ({recipePhoto, setRecipePhoto, setUploadProgress}) =>
                 <textarea type="text" onChange={updateComment} placeholder='Enter Description (optional)'/>
             </div>
             <button className="upload-button" onClick={handleClick}>Upload Recipe</button>
-            
+            {uploadError && <p>There was an error uploading the photo</p>}
         </div>
     )
 }

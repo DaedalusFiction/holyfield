@@ -19,24 +19,25 @@ import {
 } from "react-router-dom";
 import { useState, useEffect, useCallback } from 'react';
 import { auth, provider } from './firebase'
-import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'firebase/auth'
+import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth'
 import { db } from './firebase';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
   const [largePhoto, setLargePhoto] = useState(null);
+  const [loginError, setLoginError] = useState(false);
 
   const resetGallery = useCallback(() => {
-    if (largePhoto != null) {setLargePhoto(null)}
-  }, [largePhoto])
+    if (largePhoto != null) {
+          setLargePhoto(null)}
+        }, [largePhoto])
 
     const login = () => {
         signInWithPopup(auth, provider)
             .then(async (result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 GoogleAuthProvider.credentialFromResult(result);
-                
                 // const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
@@ -44,6 +45,8 @@ function App() {
                 const userRef = doc(db, "users", result.user.uid);
                 const userRefSnap = await getDoc(userRef);
                 if (!userRefSnap.exists()) {
+                  //creates new user info in firestore database
+                  //admin must be set to true in database to allow uploading of recipes and photos
                   setDoc(doc(db, "users", result.user.uid), {
                     UID: result.user.uid,
                     name: user.displayName,
@@ -55,42 +58,31 @@ function App() {
 
                 // ...
             }).catch((error) => {
-                // Handle Errors here.
-                // const errorCode = error.code;
-                // const errorMessage = error.message;
-                // The email of the user's account used.
-                // const email = error.email;
-                // The AuthCredential type that was used.
-                // const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
+                setLoginError(true);
             });
     };
 
-    const logout = (e) => {
-      e.preventDefault();
-      signOut(auth).then(() => {
-        setCurrentUser(null);
-      }).catch((error) => {
-        console.log("error signing out");
-        console.log(error);
-      });
-    }
+    //TODO: logging out currently doesn't work as I think cached data automatically logs user back in
+
+    // const logout = (e) => {
+    //   e.preventDefault();
+    //   signOut(auth).then(() => {
+    //     setCurrentUser(null);
+    //   }).catch((error) => {
+    //     console.log("error signing out");
+    //     console.log(error);
+    //   });
+    // }
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        // const newUid = user.uid;
-        console.log(user);
         setCurrentUser(user);
-      } else {
-        // User is signed out
-        // ...
-      }
+      } 
     });
 
     useEffect(() => {
       function initiate() {
+        //adds listener so that enlarged photos will reset on scroll
         window.addEventListener("scroll", resetGallery);
       }
       initiate();
@@ -122,7 +114,7 @@ function App() {
             <Link to="/upload">Upload</Link>
         </div>
         <Routes>
-          <Route path="/" element={<Home largePhoto={largePhoto} currentUser={currentUser} onClick={login} setLargePhoto={setLargePhoto}/>} />
+          <Route path="/" element={<Home largePhoto={largePhoto} currentUser={currentUser} onClick={login} loginError={loginError} setLoginError={setLoginError} setLargePhoto={setLargePhoto}/>} />
           <Route path="/family" element={<Family largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>} />
           <Route path="/farm" element={<Farm largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>} />
           <Route path="/holidays" element={<Holidays largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>} />
@@ -130,7 +122,7 @@ function App() {
           <Route path="/food" element={<Food largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>} />
           <Route path="/misc" element={<Misc largePhoto={largePhoto} setLargePhoto={setLargePhoto}/>} />
           <Route path="/recipes" element={<Recipes largePhoto={largePhoto} setLargePhoto={setLargePhoto} />} />
-          <Route path="/upload" element={<UploadPhotos currentUser={currentUser} login={login} logout={logout}/>} />
+          <Route path="/upload" element={<UploadPhotos currentUser={currentUser} login={login} loginError={loginError} setLoginError={setLoginError} />} />
         </Routes>
       </Router>
       <div className="footer flex">

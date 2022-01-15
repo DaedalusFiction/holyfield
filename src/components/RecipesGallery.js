@@ -13,6 +13,8 @@ const RecipesGallery = ({ page }) => {
     const [examinedRecipe, setExaminedRecipe] = useState(null);
 
     useEffect( () => {
+        //gets recipe photo information from firestore (database) and storage
+        //a lot of this is reused code from the photo gallery, adjusted to support recipe page formatting
         async function getPhotos() {
             const q = query(collection(db, "recipes"), orderBy("uploaded"), where(`courses.${course}`, "==", true), limit(30));
             const newURLs = [];

@@ -83,7 +83,7 @@ button {
 }
 
 .underline {
-    width: 10vw;
+    width: 8rem;
     margin: 0 auto;
     filter: invert(100%);
     -webkit-filter: invert(100%);

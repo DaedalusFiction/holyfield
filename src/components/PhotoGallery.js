@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { db } from '../firebase'
 import { collection, query, where, getDocs, limit, orderBy  } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
@@ -10,6 +10,7 @@ const PhotoGallery = ({ page, largePhoto, setLargePhoto }) => {
     const [reversed, setReversed] = useState(false);
 
     useEffect( () => {
+        //gets photo information from firestore (database) and storage
         async function getPhotos() {
             const q = query(collection(db, "photos"), orderBy("uploaded"), where(`categories.${page}`, "==", true), limit(30));
             const newURLs = [];
@@ -24,7 +25,6 @@ const PhotoGallery = ({ page, largePhoto, setLargePhoto }) => {
             setURLs(newURLs.reverse());
             setPhotoDatas(newPhotoDatas.reverse());
         }
-
         getPhotos();
 
     }, [page])
@@ -46,15 +46,9 @@ const PhotoGallery = ({ page, largePhoto, setLargePhoto }) => {
     }
     
     
-    
     const enlargePhoto = (e) => {
         setLargePhoto(e.target.src);
     }
-
-    
-
-
-
 
 
     return (

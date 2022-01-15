@@ -1,4 +1,4 @@
-import React from 'react'
+
 import PhotoGallery from './PhotoGallery'
 
 const Projects = ({largePhoto, setLargePhoto, }) => {
