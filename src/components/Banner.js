@@ -1,33 +1,29 @@
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import farm from "../images/theFarm.jpeg";
 
-const Hero = () => {
+const Banner = ({ photo, title }) => {
     return (
         <Box
             sx={{
                 // backgroundImage: `url(${earth})`,
                 backgroundImage: `linear-gradient(to bottom, rgba(20, 20, 20, 0), rgba(23, 23, 23, 0.5)),
-  url(${farm})`,
+  url(${photo})`,
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",
-                padding: "20vw 0",
+                padding: "5vw 0",
+                marginBottom: "3rem",
             }}
         >
             <Container maxWidth="xl">
                 <Typography
                     variant="h1"
-                    sx={{
-                        textAlign: "center",
-                        color: "white",
-                        textShadow: "0 0 12px black",
-                    }}
+                    sx={{ textAlign: "center", color: "white" }}
                 >
-                    Holyfield Farms
+                    {title}
                 </Typography>
             </Container>
         </Box>
     );
 };
 
-export default Hero;
+export default Banner;

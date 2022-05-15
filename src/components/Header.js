@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
-        <Box sx={{ backgroundColor: "#080f10" }}>
+        <Box
+            sx={{
+                backgroundColor: "var(--bg-secondary)",
+                boxShadow: "0 4px 2px -2px gray",
+            }}
+        >
             <Container
                 sx={{
                     display: "flex",
@@ -13,17 +18,25 @@ const Header = () => {
                 }}
             >
                 <Link to="/">
-                    <Typography sx={{ color: "white" }}>HF</Typography>
+                    <Typography sx={{ color: "var(--bg-primary)" }}>
+                        HF
+                    </Typography>
                 </Link>
                 <Box sx={{ display: "flex", gap: "3em" }}>
                     <Link to="photos">
-                        <Typography sx={{ color: "white" }}>PHOTOS</Typography>
+                        <Typography sx={{ color: "var(--bg-primary)" }}>
+                            PHOTOS
+                        </Typography>
                     </Link>
                     <Link to="recipes">
-                        <Typography sx={{ color: "white" }}>RECIPES</Typography>
+                        <Typography sx={{ color: "var(--bg-primary)" }}>
+                            RECIPES
+                        </Typography>
                     </Link>
                     <Link to="upload">
-                        <Typography sx={{ color: "white" }}>UPLOAD</Typography>
+                        <Typography sx={{ color: "var(--bg-primary)" }}>
+                            UPLOAD
+                        </Typography>
                     </Link>
                 </Box>
             </Container>

@@ -1,7 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter&display=swap");
+:root {
+    --ff-primary: "Inter", sans-serif;
+    --ff-secondary: "DM Serif Display", serif;
+    --fc-primary: rgb(28, 28, 28);
+    --fc-secondary: rgb(124, 124, 124);
+    --bg-primary: rgb(251, 236, 216);
+    --bg-secondary: #1e221a;
+    --bg-button: linear-gradient(-45deg, #ec6f66 30%, #f3a183 90%);
+}
+
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 a {
     text-decoration: none;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 2rem;
+    margin: 3rem;
+}
+
+.back-to-top {
+    background-color: transparent;
+    border: none;
+    color: var(--bg-primary);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

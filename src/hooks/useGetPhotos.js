@@ -1,17 +1,55 @@
 import { useState, useEffect } from "react";
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import {
+    collection,
+    query,
+    orderBy,
+    limit,
+    getDocs,
+    where,
+    startAfter,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
-function useGetPhotos(maxNumber) {
+function useGetPhotos(category, lastVisible) {
     const [photos, setPhotos] = useState(null);
+    const [last, setLast] = useState(null);
 
     useEffect(() => {
         async function getPhotos() {
-            const q = query(
-                collection(db, "photos"),
-                orderBy("createdAt", "desc"),
-                limit(maxNumber)
-            );
+            let q;
+            if (lastVisible === false) {
+                if (category === "All") {
+                    q = query(
+                        collection(db, "photos"),
+                        orderBy("createdAt", "desc"),
+                        limit(25)
+                    );
+                } else {
+                    q = query(
+                        collection(db, "photos"),
+                        orderBy("createdAt", "desc"),
+                        where("category", "==", category),
+                        limit(25)
+                    );
+                }
+            } else {
+                if (category === "All") {
+                    q = query(
+                        collection(db, "photos"),
+                        orderBy("createdAt", "desc"),
+                        startAfter(lastVisible),
+                        limit(25)
+                    );
+                } else {
+                    q = query(
+                        collection(db, "photos"),
+                        where("category", "==", category),
+                        orderBy("createdAt", "desc"),
+                        startAfter(lastVisible),
+                        limit(25)
+                    );
+                }
+            }
 
             const docsSnap = await getDocs(q);
             let newPhotos = [];
@@ -19,13 +57,13 @@ function useGetPhotos(maxNumber) {
                 newPhotos = [...newPhotos, doc.data()];
                 // console.log(doc.data());
             });
+            setLast(docsSnap.docs[docsSnap.docs.length - 1]);
             setPhotos(newPhotos);
         }
 
         getPhotos();
-    }, [maxNumber]);
-
-    return photos;
+    }, [category, lastVisible]);
+    return [photos, last];
 }
 
 export default useGetPhotos;

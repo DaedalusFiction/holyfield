@@ -12,10 +12,8 @@ import {
 import { auth, db, provider } from "../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-const useLogin = () => {
-    var user = null;
-    var isAdmin = null;
-    signInWithPopup(auth, provider)
+const login = async () => {
+    const user = await signInWithPopup(auth, provider)
         .then(async (result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             GoogleAuthProvider.credentialFromResult(result);
@@ -40,11 +38,12 @@ const useLogin = () => {
                     // setIsAdmin(data.data().admin);
                 });
             }
+            return user;
 
             // ...
         })
         .catch((error) => {});
-    return true;
+    return user;
 };
 
-export default useLogin;
+export default login;

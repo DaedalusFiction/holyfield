@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     const navigateToTop = () => {
-        console.log("nagivated");
+        window.scrollTo(0, 0);
     };
     return (
-        <Box sx={{ backgroundColor: "#080f10" }}>
+        <Box sx={{ backgroundColor: "var(--bg-secondary)" }}>
             <Container
                 sx={{
                     padding: "1em 0",
@@ -21,12 +21,14 @@ const Footer = () => {
                         justifyContent: "space-between",
                     }}
                 >
-                    <Link to="/">
-                        <Typography sx={{ color: "white" }}>HOME</Typography>
+                    <Link to="/" onClick={navigateToTop}>
+                        <Typography sx={{ color: "var(--bg-primary)" }}>
+                            HOME
+                        </Typography>
                     </Link>
-                    <Button onClick={navigateToTop} sx={{ color: "white" }}>
+                    <button className="back-to-top" onClick={navigateToTop}>
                         Back to Top
-                    </Button>
+                    </button>
                 </Box>
             </Container>
         </Box>

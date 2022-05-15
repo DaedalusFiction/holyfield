@@ -9,7 +9,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { addDoc, doc, setDoc, Timestamp } from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { db, storage } from "../firebase";
@@ -21,12 +21,13 @@ const UploadPhoto = () => {
     const [comment, setComment] = useState("");
     const [category, setCategory] = useState("All");
     const categories = [
-        "All",
-        "Farm Life",
-        "Projects",
-        "Meals",
-        "Holidays",
+        "The Farm",
+        "Food",
+        "Family",
         "Animals",
+        "Holidays",
+        "Projects",
+        "Misc",
     ];
 
     const handlePhotoChange = (e) => {
@@ -51,14 +52,6 @@ const UploadPhoto = () => {
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
     };
-
-    // const uploadPhotox = () => {
-    //     const storageRef = ref(storage, `photos/${selectedPhoto.name}`);
-
-    //     uploadBytesResumable(storageRef, selectedPhoto).then((snapshot) => {
-    //         setIsPhotoUploaded(true);
-    //     });
-    // };
 
     const uploadPhoto = async (e) => {
         //uploads photo to firebase storage and form data to firestore database
@@ -103,7 +96,7 @@ const UploadPhoto = () => {
                 padding: "1em",
                 display: "flex",
                 flexDirection: "column",
-                gap: "1em",
+                gap: ".5rem",
             }}
         >
             <input
