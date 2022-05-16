@@ -9,7 +9,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useState } from "react";
 import { db, storage } from "../firebase";
@@ -21,9 +21,9 @@ const UploadRecipe = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [recipeName, setRecipeName] = useState("");
     const [comment, setComment] = useState("");
-    const [category, setCategory] = useState("All");
+    const [entree, setEntree] = useState("Appetizer");
     const [ethnicity, setEthnicity] = useState("American");
-    const categories = ["Appetizer", "Entree", "Dessert", "Side", "Bread"];
+    const entrees = ["Appetizer", "Main", "Dessert", "Side", "Bread"];
     const ethnicities = [
         "American",
         "Asian",
@@ -53,8 +53,8 @@ const UploadRecipe = () => {
         setComment(e.target.value);
     };
 
-    const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
+    const handleEntreeChange = (e) => {
+        setEntree(e.target.value);
     };
     const handleEthnicityChange = (e) => {
         setEthnicity(e.target.value);
@@ -69,8 +69,8 @@ const UploadRecipe = () => {
         var downloadURLs = [];
         selectedRecipies.forEach((recipe) => {
             console.log(recipe.name);
-            const storageRef = ref(storage, recipeName);
-            const uploadTask = uploadBytesResumable(storageRef, recipe.name);
+            const storageRef = ref(storage, recipe.name);
+            const uploadTask = uploadBytesResumable(storageRef, recipe);
 
             uploadTask.on(
                 "state_changed",
@@ -92,13 +92,14 @@ const UploadRecipe = () => {
                             if (
                                 downloadURLs.length >= selectedRecipies.length
                             ) {
-                                setDoc(doc(db, "recipes", recipeName), {
+                                addDoc(collection(db, "recipes"), {
                                     URLs: downloadURLs,
                                     uploaded: Timestamp.fromDate(
                                         new Date(Date.now())
                                     ),
+                                    name: recipeName,
                                     comment: comment,
-                                    category: category,
+                                    entree: entree,
                                     ethnicity: ethnicity,
                                     createdAt: Date.now(),
                                 });
@@ -127,25 +128,6 @@ const UploadRecipe = () => {
                 gap: ".5rem",
             }}
         >
-            <Box sx={{ display: "flex", gap: "1rem" }}>
-                {previews &&
-                    previews.map((preview, index) => {
-                        return (
-                            <>
-                                <Typography>#{index + 1}</Typography>
-                                <img
-                                    id="preview"
-                                    src={preview}
-                                    alt="selected"
-                                    style={{
-                                        maxWidth: "15rem",
-                                        height: "auto",
-                                    }}
-                                />
-                            </>
-                        );
-                    })}
-            </Box>
             <Typography variant="h6">Recipe Name:</Typography>
             <TextField
                 id="updateName"
@@ -157,7 +139,7 @@ const UploadRecipe = () => {
                     // margin: "1em 0 2em 0",
                 }}
             />
-            <Typography variant="h6">Enter Comment</Typography>
+            <Typography variant="h6">Enter Comment:</Typography>
             <TextField
                 id="updateText"
                 multiline
@@ -171,15 +153,15 @@ const UploadRecipe = () => {
                 }}
             />
             <FormControl>
-                <FormLabel id="categories-label">Category:</FormLabel>
+                <FormLabel id="entrees-label">Category:</FormLabel>
                 <RadioGroup
-                    aria-labelledby="categories-label"
+                    aria-labelledby="entrees-label"
                     defaultValue="Appetizer"
                     name="radio-buttons-group"
-                    onChange={handleCategoryChange}
+                    onChange={handleEntreeChange}
                     row
                 >
-                    {categories.map((category) => {
+                    {entrees.map((category) => {
                         return (
                             <FormControlLabel
                                 key={category}
@@ -221,6 +203,25 @@ const UploadRecipe = () => {
                     sx={{ width: "fit-content" }}
                     accept="image/png, image/jpeg"
                 />
+            </Box>
+            <Box sx={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                {previews &&
+                    previews.map((preview, index) => {
+                        return (
+                            <Box>
+                                <Typography>#{index + 1}</Typography>
+                                <img
+                                    id="preview"
+                                    src={preview}
+                                    alt="selected"
+                                    style={{
+                                        maxWidth: "15rem",
+                                        height: "auto",
+                                    }}
+                                />
+                            </Box>
+                        );
+                    })}
             </Box>
             {selectedRecipies && (
                 <Button

@@ -79,7 +79,7 @@ const primaryTheme = createTheme({
                 root: {
                     color: "#1e221a",
                     fontWeight: "bold",
-                    fontSize: "2rem",
+                    fontSize: "1.25rem",
                 },
                 "&$focused": {
                     color: "#1e221a",

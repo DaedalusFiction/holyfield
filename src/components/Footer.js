@@ -7,7 +7,11 @@ const Footer = () => {
         window.scrollTo(0, 0);
     };
     return (
-        <Box sx={{ backgroundColor: "var(--bg-secondary)" }}>
+        <Box
+            sx={{
+                backgroundColor: "var(--bg-secondary)",
+            }}
+        >
             <Container
                 sx={{
                     padding: "1em 0",

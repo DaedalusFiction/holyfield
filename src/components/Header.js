@@ -28,7 +28,7 @@ const Header = () => {
                             PHOTOS
                         </Typography>
                     </Link>
-                    <Link to="recipes">
+                    <Link to="recipes-list">
                         <Typography sx={{ color: "var(--bg-primary)" }}>
                             RECIPES
                         </Typography>
