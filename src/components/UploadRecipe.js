@@ -223,7 +223,7 @@ const UploadRecipe = () => {
                         );
                     })}
             </Box>
-            {selectedRecipies && (
+            {selectedRecipies.length > 0 && (
                 <Button
                     variant="contained"
                     onClick={uploadRecipe}

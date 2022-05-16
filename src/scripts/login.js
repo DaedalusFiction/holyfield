@@ -1,14 +1,4 @@
-import { useState, useEffect } from "react";
-import {
-    collection,
-    query,
-    orderBy,
-    limit,
-    getDocs,
-    doc,
-    getDoc,
-    setDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db, provider } from "../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
@@ -33,10 +23,10 @@ const login = async () => {
                     admin: false,
                 });
             } else {
-                const userRef = doc(db, "users", result.user.uid);
-                const getTask = await getDoc(userRef).then((data) => {
-                    // setIsAdmin(data.data().admin);
-                });
+                // const userRef = doc(db, "users", result.user.uid);
+                // const getTask = await getDoc(userRef).then((data) => {
+                //     // setIsAdmin(data.data().admin);
+                // });
             }
             return user;
 

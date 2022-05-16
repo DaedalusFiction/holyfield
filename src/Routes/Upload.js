@@ -1,16 +1,13 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref } from "firebase/storage";
-import React, { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+
+import React, { useState } from "react";
 import UploadPhoto from "../components/UploadPhoto";
 import UploadRecipe from "../components/UploadRecipe";
-import { auth, db, provider } from "../firebase";
-import useLogin from "../hooks/useLogin";
+import { db } from "../firebase";
 import login from "../scripts/login.js";
 
 const Upload = () => {
-    const [currentUser, setCurrentUser] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [showUploadPhoto, setShowUploadPhoto] = useState(false);
     const [showUploadRecipe, setShowUploadRecipe] = useState(false);

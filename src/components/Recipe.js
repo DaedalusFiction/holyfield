@@ -1,8 +1,9 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import ModalImage from "react-modal-image";
 
 const Recipe = () => {
     const [recipe, setRecipe] = useState(null);
@@ -22,9 +23,6 @@ const Recipe = () => {
         getStory();
     }, [params.id]);
 
-    const testButton = () => {
-        console.log(recipe.data().URLs);
-    };
     return (
         <Container>
             {/* <Button onClick={testButton}>TEst</Button> */}
@@ -46,14 +44,11 @@ const Recipe = () => {
                                         alignItems: "center",
                                     }}
                                 >
-                                    <img
+                                    <ModalImage
                                         key={URL}
-                                        src={URL}
+                                        small={URL}
+                                        large={URL}
                                         alt={recipe.data().name}
-                                        style={{
-                                            width: "100%",
-                                            height: "auto",
-                                        }}
                                     />
                                 </Grid>
                             );
@@ -61,7 +56,13 @@ const Recipe = () => {
                     </Grid>
                 </>
             )}
-            <Typography sx={{ maxWidth: "55ch" }}>
+            <Typography
+                sx={{
+                    fontSize: "1.5rem",
+                    maxWidth: "55ch",
+                    margin: "3em 0",
+                }}
+            >
                 {recipe && recipe.data().comment}
             </Typography>
         </Container>

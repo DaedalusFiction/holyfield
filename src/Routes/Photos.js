@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { storage } from "../firebase";
 import ModalImage from "react-modal-image";
 import {
     Box,
     Button,
     Container,
-    Divider,
     FormControl,
     FormControlLabel,
     FormLabel,

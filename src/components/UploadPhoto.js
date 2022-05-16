@@ -99,22 +99,6 @@ const UploadPhoto = () => {
                 gap: ".5rem",
             }}
         >
-            <input
-                type="file"
-                id="photoInput"
-                // value={selectedPhoto}
-                onChange={handlePhotoChange}
-                sx={{ width: "fit-content" }}
-                accept="image/png, image/jpeg"
-            />
-            {selectedPhoto && (
-                <img
-                    id="preview"
-                    src={selectedPhoto}
-                    alt="selected"
-                    style={{ maxWidth: "15rem", height: "auto" }}
-                />
-            )}
             <Typography variant="h6">Enter Comment</Typography>
             <TextField
                 id="updateText"
@@ -149,6 +133,22 @@ const UploadPhoto = () => {
                     })}
                 </RadioGroup>
             </FormControl>
+            <input
+                type="file"
+                id="photoInput"
+                // value={selectedPhoto}
+                onChange={handlePhotoChange}
+                sx={{ width: "fit-content" }}
+                accept="image/png, image/jpeg"
+            />
+            {selectedPhoto && (
+                <img
+                    id="preview"
+                    src={selectedPhoto}
+                    alt="selected"
+                    style={{ maxWidth: "15rem", height: "auto" }}
+                />
+            )}
             {selectedPhoto && (
                 <Button
                     variant="contained"

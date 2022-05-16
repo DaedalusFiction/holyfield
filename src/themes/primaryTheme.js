@@ -55,10 +55,9 @@ const primaryTheme = createTheme({
                     padding: ".6em 1.5em",
                     textDecoration: "none",
 
-                    color: "black",
+                    color: "var(--fc-primary)",
                     "&:hover": {
                         transition: "300ms",
-                        transform: "translateY(-3px)",
                     },
                 },
             },

@@ -1,21 +1,15 @@
 import {
     Container,
     FormControl,
-    FormControlLabel,
-    FormLabel,
     InputLabel,
     MenuItem,
-    Radio,
-    RadioGroup,
     Select,
-    Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Banner from "../components/Banner";
-import Recipe from "../components/Recipe";
 import { db } from "../firebase";
 import gyro from "../images/gyro.jpg";
 const Recipes = () => {
