@@ -55,7 +55,7 @@ const Upload = () => {
                     sx={{
                         display: "flex",
                         justifyContent: "center",
-                        gap: "4em",
+                        gap: "3em",
                     }}
                 >
                     <Button variant="contained" onClick={handleShowUploadPhoto}>
