@@ -107,7 +107,7 @@ const UploadPhoto = () => {
                 value={comment}
                 onChange={handleCommentChange}
                 sx={{
-                    minWidth: "45ch",
+                    minWidth: "35ch",
                     maxWidth: "55ch",
                     // margin: "1em 0 2em 0",
                 }}

@@ -8,7 +8,7 @@ const Banner = ({ photo, title }) => {
                 // backgroundImage: `url(${earth})`,
                 backgroundImage: `linear-gradient(to bottom, rgba(20, 20, 20, 0), rgba(23, 23, 23, 0.5)),
   url(${photo})`,
-                backgroundAttachment: "fixed",
+                // backgroundAttachment: "fixed",
                 backgroundSize: "cover",
                 padding: "5vw 0",
                 marginBottom: "3rem",
@@ -16,8 +16,12 @@ const Banner = ({ photo, title }) => {
         >
             <Container maxWidth="xl">
                 <Typography
-                    variant="h1"
-                    sx={{ textAlign: "center", color: "white" }}
+                    variant="h2"
+                    sx={{
+                        textAlign: "center",
+                        color: "white",
+                        fontSize: "clamp(3rem, 10vw, 12rem)",
+                    }}
                 >
                     {title}
                 </Typography>
