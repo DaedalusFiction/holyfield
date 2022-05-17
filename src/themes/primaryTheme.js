@@ -48,18 +48,17 @@ const primaryTheme = createTheme({
     components: {
         MuiButton: {
             styleOverrides: {
-                root: {
-                    fontSize: "1.2rem",
-                    background: "var(--bg-button)",
-                    border: 0,
-                    padding: ".6em 1.5em",
-                    textDecoration: "none",
-
-                    color: "var(--fc-primary)",
-                    "&:hover": {
-                        transition: "300ms",
-                    },
-                },
+                // root: {
+                //     fontSize: "1.2rem",
+                //     background: "var(--bg-button)",
+                //     border: 0,
+                //     padding: ".6em 1.5em",
+                //     textDecoration: "none",
+                //     color: "var(--fc-primary)",
+                //     "&:hover": {
+                //         transition: "300ms",
+                //     },
+                // },
             },
         },
         MuiRadio: {

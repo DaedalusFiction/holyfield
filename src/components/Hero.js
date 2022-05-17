@@ -11,13 +11,14 @@ const Hero = () => {
   url(${farm})`,
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",
-                padding: "20vw 0",
+                padding: "18rem 0",
             }}
         >
             <Container maxWidth="xl">
                 <Typography
                     variant="h1"
                     sx={{
+                        fontSize: "clamp(3rem, 10vw, 12rem)",
                         textAlign: "center",
                         color: "white",
                         textShadow: "0 0 12px black",

@@ -6,7 +6,6 @@ import Home from "./Routes/Home";
 import Layout from "./Routes/Layout";
 import Photos from "./Routes/Photos";
 import Recipes from "./Routes/Recipes";
-import RecipesList from "./Routes/RecipesList";
 import Upload from "./Routes/Upload";
 
 function App() {
@@ -15,8 +14,8 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="photos" element={<Photos />} />
-                <Route path="recipes-list" element={<RecipesList />} />
-                <Route path="recipes" element={<Recipes />}>
+                <Route path="recipes" element={<Recipes />} />
+                <Route path="recipe">
                     <Route path=":id" element={<Recipe />} />
                 </Route>
 

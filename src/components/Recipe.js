@@ -28,8 +28,11 @@ const Recipe = () => {
             {/* <Button onClick={testButton}>TEst</Button> */}
             {recipe && (
                 <>
-                    <Typography variant="h1" sx={{ margintop: "3em" }}>
+                    <Typography variant="h1" sx={{ marginTop: ".5em" }}>
                         {recipe.data().name}
+                    </Typography>
+                    <Typography>
+                        {recipe.data().ethnicity} {recipe.data().entree}
                     </Typography>
                     <Grid container spacing={3} sx={{ margin: ".5em 0" }}>
                         {recipe.data().URLs.map((URL) => {
@@ -56,6 +59,9 @@ const Recipe = () => {
                     </Grid>
                 </>
             )}
+            <Typography variant="h5" sx={{ marginTop: "1em" }}>
+                Notes:{" "}
+            </Typography>
             <Typography
                 sx={{
                     fontSize: "1.5rem",
@@ -63,7 +69,7 @@ const Recipe = () => {
                     margin: "3em 0",
                 }}
             >
-                {recipe && recipe.data().comment}
+                {recipe && recipe.data().notes}
             </Typography>
         </Container>
     );

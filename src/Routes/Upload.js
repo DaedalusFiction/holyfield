@@ -28,16 +28,26 @@ const Upload = () => {
     };
     return (
         <Container sx={{ marginTop: "3em", marginBottom: "3em" }}>
-            <Typography variant="h2">Upload Photos and Recipes</Typography>
+            <Typography
+                variant="h2"
+                sx={{ fontSize: "clamp(3rem, 6vw, 10.5rem)" }}
+            >
+                Upload Photos and Recipes
+            </Typography>
             {/* {user && <Typography variant="h2">{user.data().admin}</Typography>} */}
             {!isAdmin && (
-                <Button
-                    variant="contained"
-                    onClick={handleLogin}
-                    sx={{ margin: "1em 0" }}
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "8em 0 13em 0",
+                    }}
                 >
-                    Log In with Google
-                </Button>
+                    <Button variant="contained" onClick={handleLogin}>
+                        Log In with Google
+                    </Button>
+                </Box>
             )}
             <br />
             {isAdmin && (
@@ -48,10 +58,13 @@ const Upload = () => {
                         gap: "5em",
                     }}
                 >
-                    <Button onClick={handleShowUploadPhoto}>
+                    <Button variant="contained" onClick={handleShowUploadPhoto}>
                         Upload Photo
                     </Button>
-                    <Button onClick={handleShowUploadRecipe}>
+                    <Button
+                        variant="contained"
+                        onClick={handleShowUploadRecipe}
+                    >
                         Upload Recipe
                     </Button>
                 </Box>

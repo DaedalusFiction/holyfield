@@ -20,7 +20,7 @@ const UploadRecipe = () => {
     const [isRecipeUploaded, setIsRecipeUploaded] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [recipeName, setRecipeName] = useState("");
-    const [comment, setComment] = useState("");
+    const [notes, setNotes] = useState("");
     const [entree, setEntree] = useState("Appetizer");
     const [ethnicity, setEthnicity] = useState("American");
     const entrees = ["Appetizer", "Main", "Dessert", "Side", "Bread"];
@@ -49,8 +49,8 @@ const UploadRecipe = () => {
         }
     };
 
-    const handleCommentChange = (e) => {
-        setComment(e.target.value);
+    const handleNotesChange = (e) => {
+        setNotes(e.target.value);
     };
 
     const handleEntreeChange = (e) => {
@@ -98,7 +98,7 @@ const UploadRecipe = () => {
                                         new Date(Date.now())
                                     ),
                                     name: recipeName,
-                                    comment: comment,
+                                    notes: notes,
                                     entree: entree,
                                     ethnicity: ethnicity,
                                     createdAt: Date.now(),
@@ -107,7 +107,7 @@ const UploadRecipe = () => {
                                 setPreviews([]);
                                 setRecipeName("");
 
-                                setComment("");
+                                setNotes("");
                                 setIsRecipeUploaded(true);
                                 document.getElementById("recipeInput").value =
                                     null;
@@ -139,13 +139,13 @@ const UploadRecipe = () => {
                     // margin: "1em 0 2em 0",
                 }}
             />
-            <Typography variant="h6">Enter Comment:</Typography>
+            <Typography variant="h6">Enter Notes:</Typography>
             <TextField
                 id="updateText"
                 multiline
                 minRows={2}
-                value={comment}
-                onChange={handleCommentChange}
+                value={notes}
+                onChange={handleNotesChange}
                 sx={{
                     minWidth: "45ch",
                     maxWidth: "55ch",

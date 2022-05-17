@@ -12,27 +12,19 @@ const Footer = () => {
                 backgroundColor: "var(--bg-secondary)",
             }}
         >
-            <Container
-                sx={{
-                    padding: "1em 0",
-                }}
-            >
+            <Container maxWidth="xl">
                 <Box
                     sx={{
                         display: "flex",
                         gap: "3em",
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "end",
+                        padding: "1em 0",
                     }}
                 >
-                    <Link to="/" onClick={navigateToTop}>
-                        <Typography sx={{ color: "var(--bg-primary)" }}>
-                            HOME
-                        </Typography>
-                    </Link>
-                    <button className="back-to-top" onClick={navigateToTop}>
+                    <Button onClick={navigateToTop} sx={{ color: "white" }}>
                         Back to Top
-                    </button>
+                    </Button>
                 </Box>
             </Container>
         </Box>
