@@ -59,14 +59,14 @@ const Recipe = () => {
                     </Grid>
                 </>
             )}
-            <Typography variant="h5" sx={{ marginTop: "1em" }}>
+            <Typography variant="h5" sx={{ margin: "1em 0" }}>
                 Notes:{" "}
             </Typography>
             <Typography
                 sx={{
                     fontSize: "1.5rem",
                     maxWidth: "55ch",
-                    margin: "3em 0",
+                    margin: "0 0 3em 0",
                 }}
             >
                 {recipe && recipe.data().notes}
