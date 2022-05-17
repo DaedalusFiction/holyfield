@@ -139,10 +139,9 @@ const Header = () => {
                             display: { xs: "none", md: "flex" },
                         }}
                     >
-                        {pages.map((page) => (
-                            <Link to={page.toLowerCase()}>
+                        {pages.map((page, index) => (
+                            <Link key={page} to={page.toLowerCase()}>
                                 <Button
-                                    key={page}
                                     onClick={handleCloseNavMenu}
                                     sx={{
                                         my: 2,
