@@ -67,9 +67,10 @@ const Recipe = () => {
                     fontSize: "1.5rem",
                     maxWidth: "55ch",
                     margin: "0 0 3em 0",
+                    whiteSpace: "pre-wrap",
                 }}
             >
-                {recipe && recipe.data().notes}
+                {recipe && recipe.data().notes.replace("\\n", "\n")}
             </Typography>
         </Container>
     );

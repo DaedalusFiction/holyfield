@@ -51,6 +51,7 @@ const UploadRecipe = () => {
 
     const handleNotesChange = (e) => {
         setNotes(e.target.value);
+        console.log(e.target.value);
     };
 
     const handleEntreeChange = (e) => {
