@@ -58,7 +58,7 @@ const Header = () => {
                             textDecoration: "none",
                         }}
                     >
-                        HOLYFIELD FARMS
+                        HOLYFIELD
                     </Typography>
 
                     <Box
